@@ -1,0 +1,24 @@
+{
+  "name": "Deckdown",
+  "version": "0.0.1",
+  "description": "Write markdown, get a slide deck. Now BS.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "import": "./import/run.sh"
+  },
+  "repository": "",
+  "keywords": [
+    "zetta"
+  ],
+  "author": "Alan Languirand <alan@13protons.com>",
+  "license": "MIT",
+  "dependencies": {
+    "marked": "~0.3.2",
+    "ejs": "~1.0.0"
+  },
+  "engines": {
+    "node": ">= 0.10.0",
+    "npm": ">= 1.2.0"
+  }
+}
