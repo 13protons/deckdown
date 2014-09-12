@@ -23,10 +23,12 @@ app.use(express.static(path.join(__dirname, 'public'))); //  "public" off of cur
 
 app.use('/deck', function(req, res, next){
   timer = Date.now();
-  request(req.param('src'), function (error, response, body) {
+  var url = req.param('src') || 'https://raw.githubusercontent.com/alanguir/deckdown/master/README.md'
+  
+  request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       //Get the name of the deck
-      var _names = req.param('src').match(/[A-Z,a-z]+/g);
+      var _names = url.match(/[A-Z,a-z]+/g);
       var rawSlides = mdToHtmlArray(body);
       //combine
       var slides = rawSlides.map(function(slide, i){
@@ -53,9 +55,9 @@ app.use('/deck', function(req, res, next){
 
 });
 
-app.get('/deck', function (req, res) {
-  console.log('generated deck in ' + (Date.now() - timer) + 'ms');
-  res.render('deck', res.deck);
+app.get('/', function (req, res) {
+  var page = fs.readFileSync(process.cwd() + "/deckdownis.md", "utf8");
+  res.render('index', {content: marked(page)});
 });
 
 var port = process.env.PORT || 3000;

@@ -2,34 +2,42 @@
 
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Deckdown</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <link rel="stylesheet" href="styles/reveal.min.css">
-    <link rel="stylesheet" href="styles/theme/<%= template %>.css" id="theme">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
     <style>
+      body{ 
+        font-family: 'Open Sans', sans-serif; 
+      }
+      
+      .page {
+        width: 80%; margin: 0 auto;
+      }
+      h1, h2, h3, h4 {
+        font-weight: 300;
+        border-bottom: 1px solid #eee;
+      }
+      code {
+        background-color: #eee;
+        border-radius: .25rem;
+        font-family: monospace;
+        font-size: 1.2em;
+        padding: .2rem .5rem;
+      }
+      pre {padding: 1rem 0;}
+      pre code  {
+        padding: 1rem;
+      }
+      
+      
+      
       
     </style>
   </head>
   <body>
-    <div class="reveal">
-      <div class="slides">
-        <%- content %>
-      </div>
+    <div class="page">
+      <%- content %>
     </div>
-    <script type="text/javascript" src="scripts/reveal.min.js"></script>
-    <script>
-
-      Reveal.initialize({
-          controls: true,
-          progress: true,
-          history: true,
-          center: true,
-
-          theme: Reveal.getQueryHash().theme, // available themes are in /styles/theme
-          transition: Reveal.getQueryHash().transition || 'default'
-      });
-    </script>
   </body>
 </html>
