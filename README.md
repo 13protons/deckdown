@@ -1,12 +1,28 @@
 deckdown
 ========
 
-Write markdown, get a slide deck. No BS. 
+Write markdown, get a slide deck. No BS. Or JS. Or HTML.
 
 ##Vision
 
-This should be a simple tool that allows you to create a slide-deck type of presentation without using slideware. There is a focus on fewer features/more utility. Transitions on a single slide will not be implemented, for example. 
+Deckdown is for breaking out of slideware jail. I love tools like reveal.js (it's even used in this project), but the PROCESS of using it feels like trading the bloat of powerpoint for the pain of writing code when we all really just want to be writing content. 
 
-Using markdown will make it possible for a whole deck to exist as a simple text file. Performance should be such that parsing 100-200 slides takes < 2 seconds, client side. Node should be able to cross-compile a template and markdown file into a single webpage. 
+##How it works
 
-I want to love revel.js, but I don't want to write html to make a slide deck. I just don't. 
+Deckdown parses your markdown file into HTML, then uses the header tags as breakpoints for new slides. In this way, something like this...
+
+```
+  ##Vision
+  Deckdown is for breaking out of slideware jail. I love tools like reveal.js... 
+
+  ##How it works
+  Deckdown parses your markdown file into HTML...
+```
+
+...becomes two slides in your deck. 
+
+##Where this is headed
+
+The goal of this project is to make something robust enough that it can be a hosted service that does fancy things like take the url of a readme file on github, and give back a bit.ly style permalink to the resulting slide deck. Conference presentations will be maintainable as a single text file. Non-devs will suddenly have access to huge amounts of content without us, the content creators, running through the hoops of slideware. Mountains will move. 
+
+If you want to contribute, just ask. I'd love your help. 
