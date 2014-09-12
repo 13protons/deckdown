@@ -1,157 +1,171 @@
-# express-pouchdb
+#Let’s Gulp
+by: Alan Languirand 
+[alan@13protons.com][email Alan]
+@13protons
 
-> An Express submodule with a CouchDB style REST interface to PouchDB.
+##What is gulp?
 
-## Introduction
+![gulp logo](https://raw2.github.com/gulpjs/artwork/master/gulp-2x.png)
+*The streaming build system*
 
-The **express-pouchdb** module is a fully qualified [Express](http://expressjs.com/) application with routing defined to 
-mimic most of the [CouchDB](http://couchdb.apache.org/) REST API, and whose behavior is handled by 
-[PouchDB](http://pouchdb.com/). The intention is for **express-pouchdb** to be mounted into other Express apps for 
-extended usability. A simple example of this is [pouchdb-server](https://github.com/nick-thompson/pouchdb-server), 
-which is primarily used as a quick-and-dirty drop-in replacement for CouchDB in Node.js.
+Technically, it’s a node.js plugin for manipulating virtual file streams.
 
-## Screencasts
+#Huh?
 
-* [Modular web applications with Node.js and Express](http://vimeo.com/56166857)
+##The need for a build system
 
-## Installation
+A build system is a way of managing the complexity of going from your working website code to production/distribution code. This is roughly equivalent to your compile step in a language like java or objective-c.  
 
-```bash
-$ npm install express-pouchdb
+##The need for a build system
+
+(We’ll get to the virtual file stream business once we start manipulating code.)
+
+##What gulp does
+
+Gulp does all your work for you when it comes to things like CSS pre-compiling, javascript minification and image optimization. Normally, these are things done by hand, right before you go live with a website.
+
+##What gulp does
+
+With gulp, this can literally be done automatically every time you make changes to a file in your website.  
+
+##Designers <3 Gulp
+
+With this type of build system, you’ll always have a **production quality** version of your website. No more debugging unexpected errors at 11pm the night before you go live due to unexpected hiccups in your manual build process. 
+
+##What gulp does (cont.)
+
+There are currently just shy of 700 plugins for gulp. 
+
+##Let’s talk turkey
+
+Here’s the gulp api:
+  * .task()
+  * .src()
+  * .pipe()
+  * .write()
+  * .watch()
+
+#That’s it. 
+
+I know you were expecting a longer list, but there isn’t one. Let’s get some things installed, and then we’ll explore each of the 5 functions in the gulp api in more detail.
+
+##Get node up and running
+
+![node logo][]
+[Install Node][node]
+	
+##What’s node?
+
+Node.js is a way of using javascript to write code that gets run as a web server. It lets us run javascript outside of the context of a web browser so we can use it for more powerful things, like accessing and manipulating the filesystem. 
+
+##Let’s test our install
+
+Now that node is installed, open up your terminal. Verify that node and npm have been installed by running these commands: 
+
+```
+$ node -v
+$ npm -v
+```
+If you don’t see something like this: 
+```
+$ node -v
+	v0.10.21
+$ npm -v
+	1.3.21
+```
+Then it’s time to get some [Installation help][]
+
+##Download an example
+
+This presentation was built with gulp. You can download it here: [https://github.com/alanguir/letsgulp](https://github.com/alanguir/letsgulp)
+
+##Navigate to the example
+
+`$ cd path/to/example/files`
+
+##Install dependencies
+
+Run these two commands:
+```
+$ npm install -g gulp
 ```
 
-## Example Usage
-
-Here's a sample Express app, which we'll name `app.js`.
-
-```javascript
-var express = require('express')
-  , app     = express()
-  , PouchDB = require('pouchdb');
-
-app.use(express.logger('tiny'));
-app.use('/db', require('express-pouchdb')(PouchDB));
-
-app.listen(3000);
+```
+$ npm install
 ```
 
-Now we can run this little guy and find each of `express-pouch`'s routes at the `/db` prefix.
+##What just happened? 
 
-```bash
-$ node app.js &
-$ curl http://localhost:3000/db/
-GET / 200 56 - 7 ms
-{
-  "express-pouchdb": "Welcome!",
-  "version": "0.2.0"
-}
+First up, we installed gulp. The `-g` switch told npm to install it globally so any future node app can have access to it. 
+
+##What just happened? 
+
+Next, we installed our application dependencies. The `package.json` file defines information about our node app. It includes things like who wrote it, where you can find it's source code, and libraries that app depends on. Gulp stores information about it's plugins in 'dev dependencies'. It looks like this: 
+
+```
+"devDependencies": {
+    "gulp": "~3.8.6",
+    "gulp-minify-css": "~0.3.8",
+    "gulp-less-sourcemap": "~1.3.3",
+    "gulp-concat": "~2.4.0",
+    "gulp-uglify": "~1.0.1"
+  }
 ```
 
-*Note,* **express-pouchdb** bundles its own JSON parsing middleware which conflicts with 
-[`express.bodyParser()`](http://expressjs.com/api.html#bodyParser). Please avoid using `express.bodyParser()`. Rather,
-you can use `express.urlencoded()` and `express.multipart()` alongside the **express-pouchdb** JSON middleware 
-and you should find the results to be the same as you would have expected with `express.bodyParser()`.
+##What just happened?
 
-```javascript
-app.use(express.urlencoded());
-app.use(express.multipart());
-app.use(require('express-pouchdb')(require('pouchdb')));
+The `devDependencies` object tells node which packages to fetch for a dev build, meaning these will **not** be installed if you deploy to a production server like [heroku](http://heroku.com). For those familiar with ruby, a *node package* is like a *ruby gem*. Unlike ruby gems, a node package is only installed for one app in one directory, unless installed globally with `-g`. 
+
+##Lets add another dependency
+
+Head on over to the [gulp plugin](http://gulpjs.com/plugins/) page, and search for `gulp-serve`. Clicking on `gulp-serve` in the list below will take you to the node package [registry entry](https://www.npmjs.org/package/gulp-serve/) that tells you how to use the plugin.
+
+##Lets add another dependency
+
+Notice the terminal command front and center at the top of the page: `npm install gulp-serve`. This is the general command to install `gulp-serve`. In order to also save a reference to `gulp-serve` in our `package.json` file (so that it can be intalled with `npm install` in the future, we need to modify the terminal command to read: 
+
+```
+$ npm install gulp-serve --save-dev
 ```
 
-### Using your own PouchDB
+The `--save-dev` switch tells npm to also save a reference to this intall command in the dev dependecies list. 
 
-Since you pass in the `PouchDB` that you would like to use with express-pouchb, you can drop
-express-pouchdb into an existing Node-based PouchDB application and get all the benefits of the HTTP interface without having to change your code.
+#Whew
 
-```js
-var express = require('express')
-  , app     = express()
-  , PouchDB = require('pouchdb');
+Ok, we're all set up. For those familiar with node, this should be no sweat. For those who are working with node for the first time, we just covered a lot of ground. Let's do a quick recap.
 
-app.use('/db', require('express-pouchdb')(PouchDB));
+##Recap - concepts
 
-var myPouch = new PouchDB('foo');
+  * Gulp is a streaming build system for node.js
+  * Node is a server technology that lets you write server functionality with javascript 
+  * NPM is the *Node Package Manager*, and is used to install libraries your app depends on
+  * We interact with *node* and *npm* via the *terminal* (or windows command line)
+  * Node apps can store references to npm libraries via the `package.json` file
+  * Gulp stores *it's* dependencies under the 'devDependencies' section
 
-// myPouch is now modifiable in your own code, and it's also
-// available via HTTP at /db/foo
-```
+##Recap - actions
 
-### PouchDB defaults
+  * `$ npm install -g gulp` to install gulp for the first time
+  * `npm install` to have node fetch all the packages specified in `package.json`
+  * Install a gulp plugin and save it locally with `$ npm install -g gulp-plugin-name`
+  
 
-**Warning: this feature will be added in PouchDB 3.0.0. Use the PouchDB master branch if you can't wait.**
+* Here’s a canned sample project that we’ll put through a build process together
+    * a tour of the gulp plugin space
+    * concepts of NPM and package management
+    * using plugins in gulp
+    * the handful of plugins you’ll use for every project
+    * ??? (there’s more to dig into here. We’ll see what time allows for)
+* Questions? 
+* Go forth and conquer the world (drinks next door if you want to chat more)
 
-When you use your own PouchDB code in tandem with express-pouchdb, the `PouchDB.defaults()` API can be very convenient for specifying some default settings for how PouchDB databases are created.
+People who are a good fit for a workshop like this probably work in front end design/dev, are comfortable writing javascript, have built projects complex enough to require JS/CSS compiling, and can find their way around a command line. 
 
-For instance, if you want to use an in-memory [MemDOWN](https://github.com/rvagg/memdown)-backed pouch, you can simply do:
+As far as dates, my schedule would accommodate late October and beyond. 
 
-```js
-var InMemPouchDB = PouchDB.defaults({db: require('memdown')});
+How does that sound? For those who don’t know node, this will also kinda be a crash course in that too, even though you don’t have to understand *too* much about node to use gulp. 
 
-app.use('/db', require('express-pouchdb')(InMemPouchDB));
-
-var myPouch = new InMemPouchDB('foo');
-```
-
-Similarly, if you want to place all database files in a folder other than the `pwd`, you can do:
-
-```js
-var TempPouchDB = PouchDB.defaults({prefix: '/tmp/my-temp-pouch/'});
-
-app.use('/db', require('express-pouchdb')(TempPouchDB));
-
-var myPouch = new TempPouchDB('foo');
-```
-
-## Contributing
-
-Want to help me make this thing awesome? Great! Here's how you should get started.
-
-1. Because PouchDB is still developing so rapidly, you'll want to clone `git@github.com:daleharvey/pouchdb.git`, and run `npm link` from the root folder of your clone.
-2. Fork **express-pouchdb**, and clone it to your local machine.
-3. From the root folder of your clone run `npm link pouchdb` to install PouchDB from your local repository from Step 1.
-4. `npm install`
-
-Please make your changes on a separate branch whose name reflects your changes, push them to your fork, and open a pull request!
-
-For commit message style guidelines, please refer to [PouchDB CONTRIBUTING.md](https://github.com/pouchdb/pouchdb/blob/master/CONTRIBUTING.md).
-
-### Fauxton
-
-The custom Fauxton theme, with the PouchDB Server name and logo, are kept [in a Fauxton fork](https://github.com/nolanlawson/couchdb-fauxton) for the time being.
-
-## Contributors
-
-A huge thanks goes out to all of the following people for helping me get this to where it is now.
-
-* Dale Harvey ([@daleharvey](https://github.com/daleharvey))
-* Nolan Lawson ([@nolanlawson](https://github.com/nolanlawson)) 
-* Ryan Ramage ([@ryanramage](https://github.com/ryanramage))
-* Garren Smith ([@garrensmith](https://github.com/garrensmith))
-* ([@copongcopong](https://github.com/copongcopong))
-* ([@zevero](https://github.com/zevero))
-
-## License
-
-Copyright (c) 2013 Nick Thompson
-
-Permission is hereby granted, free of charge, to any person
-obtaining a copy of this software and associated documentation
-files (the "Software"), to deal in the Software without
-restriction, including without limitation the rights to use,
-copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following
-conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
-
+[email Alan]: mailto:alan@13protons.com
+[node logo]: http://nodejs.org/images/logo.svg
+[Installation Help]: http://
+[node]: http://nodejs.org/

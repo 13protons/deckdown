@@ -4,38 +4,33 @@ var fs = require("fs")
   , diveSync = require("diveSync")
   , extend = require('node.extend');
 
+//inventory templates
+var templates = []
 
+diveSync(
+  process.cwd() + "/templates", 
+  { recursive: false, directories: true, files: false }, 
+  function(err, dir) {
+    if (err) throw err;
+    templates.push({path: dir});
+  }
+);
+
+templates.forEach(function(template, i){
+  //load template.json
+  console.log(i);
+});
+                  
 //load the template
-var template = {
-  main: fs.readFileSync(process.cwd() + "/templates/default/index.html", "utf8"), 
-  slides: fs.readFileSync(process.cwd() + "/templates/default/masters/default.html", "utf8")
-};
 
-console.log(template);
 
 //load and breakup markdown file
 
-fs.readFile(process.cwd() + "/pres/test.md", "utf8", function(error, data) {
-  var rawSlides = mdToHtmlArray(data);
-  //combine
-  var slides = rawSlides.map(function(slide, i){
-    return ejs.render(template.slides, {
-      content: slide.content
-    });
-  });
-  var deck = ejs.render(template.main, {
-    content: slides.join("")
-  });
-  console.log(deck);   
-  
-  fs.writeFile(process.cwd() + '/pres/test.html', deck, function (err) {
-      if (err) throw err;
-      console.log('It\'s saved!');
-    });
-  
+fs.readFile("pres/test.md", "utf8", function(error, data) {
+  var slides = mdToHtmlArray(data);
 });  
 
- 
+//combine 
 
 
 //functions
@@ -55,10 +50,9 @@ function mdToHtmlArray(markdown){
     
     slides = slides.map(function(s, i){
       //add proper header number back after it was lost in the replace
-      return {
-        'level': headers[i].slice(1),
-        'content': headers[i] + s
-      }; 
+      var obj = {};
+      obj[headers[i].slice(1)] = headers[i] + s;
+      return obj; 
     });
     
     return slides;

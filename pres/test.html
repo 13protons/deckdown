@@ -2,34 +2,140 @@
 
 <html>
   <head>
-    <title>Deck title</title>
-    
+    <title>Deckdown Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="styles/reveal.min.css">
+    <link rel="stylesheet" href="styles/theme/simple.css" id="theme">
     <style>
-      .slide {
-        background-color: #eee;
-        padding: 2rem;
-        margin: 2rem;
-      }
+      
     </style>
   </head>
   <body>
-    <section id="slide_1" class="slide"><h2 id="slide-one">Slide One</h2>
-<p>This is the first Slide</p>
-
-</section><section id="slide_2" class="slide"><h2 id="goals">Goals</h2>
-<p>Today we will cover</p>
+    <div class="reveal">
+      <div class="slides">
+        <section><h1 id="let-s-gulp">Let’s Gulp</h1>
+<p>by: Alan Languirand 
+<a href="mailto:alan@13protons.com">alan@13protons.com</a>
+@13protons</p>
+</section><section><h2 id="what-is-gulp-">What is gulp?</h2>
+<p><img src="https://raw2.github.com/gulpjs/artwork/master/gulp-2x.png" alt="gulp logo">
+<em>The streaming build system</em></p>
+<p>Technically, it’s a node.js plugin for manipulating virtual file streams.</p>
+</section><section><h1 id="huh-">Huh?</h1>
+</section><section><h2 id="the-need-for-a-build-system">The need for a build system</h2>
+<p>A build system is a way of managing the complexity of going from your working website code to production/distribution code. This is roughly equivalent to your compile step in a language like java or objective-c.  </p>
+</section><section><h2 id="the-need-for-a-build-system">The need for a build system</h2>
+<p>(We’ll get to the virtual file stream business once we start manipulating code.)</p>
+</section><section><h2 id="what-gulp-does">What gulp does</h2>
+<p>Gulp does all your work for you when it comes to things like CSS pre-compiling, javascript minification and image optimization. Normally, these are things done by hand, right before you go live with a website.</p>
+</section><section><h2 id="what-gulp-does">What gulp does</h2>
+<p>With gulp, this can literally be done automatically every time you make changes to a file in your website.  </p>
+</section><section><h2 id="designers-3-gulp">Designers &lt;3 Gulp</h2>
+<p>With this type of build system, you’ll always have a <strong>production quality</strong> version of your website. No more debugging unexpected errors at 11pm the night before you go live due to unexpected hiccups in your manual build process. </p>
+</section><section><h2 id="what-gulp-does-cont-">What gulp does (cont.)</h2>
+<p>There are currently just shy of 700 plugins for gulp. </p>
+</section><section><h2 id="let-s-talk-turkey">Let’s talk turkey</h2>
+<p>Here’s the gulp api:</p>
 <ul>
-<li>GFM</li>
-<li>GIT</li>
-<li>How to install node</li>
+<li>.task()</li>
+<li>.src()</li>
+<li>.pipe()</li>
+<li>.write()</li>
+<li>.watch()</li>
 </ul>
-
-</section><section id="slide_3" class="slide"><h1 id="review">Review</h1>
-
-</section><section id="slide_4" class="slide"><h3 id="how-to-we-accept-user-input-in-ruby-">How to we accept user input in ruby?</h3>
-
-</section><section id="slide_5" class="slide"><h3 id="how-do-we-ouput-text-to-the-user-in-ruby-">How do we ouput text to the user in ruby?</h3>
-
+</section><section><h1 id="that-s-it-">That’s it.</h1>
+<p>I know you were expecting a longer list, but there isn’t one. Let’s get some things installed, and then we’ll explore each of the 5 functions in the gulp api in more detail.</p>
+</section><section><h2 id="get-node-up-and-running">Get node up and running</h2>
+<p><img src="http://nodejs.org/images/logo.svg" alt="node logo">
+<a href="http://nodejs.org/">Install Node</a></p>
+</section><section><h2 id="what-s-node-">What’s node?</h2>
+<p>Node.js is a way of using javascript to write code that gets run as a web server. It lets us run javascript outside of the context of a web browser so we can use it for more powerful things, like accessing and manipulating the filesystem. </p>
+</section><section><h2 id="let-s-test-our-install">Let’s test our install</h2>
+<p>Now that node is installed, open up your terminal. Verify that node and npm have been installed by running these commands: </p>
+<pre><code>$ node -v
+$ npm -v
+</code></pre><p>If you don’t see something like this: </p>
+<pre><code>$ node -v
+    v0.10.21
+$ npm -v
+    1.3.21
+</code></pre><p>Then it’s time to get some <a href="http://">Installation help</a></p>
+</section><section><h2 id="download-an-example">Download an example</h2>
+<p>This presentation was built with gulp. You can download it here: <a href="https://github.com/alanguir/letsgulp">https://github.com/alanguir/letsgulp</a></p>
+</section><section><h2 id="navigate-to-the-example">Navigate to the example</h2>
+<p><code>$ cd path/to/example/files</code></p>
+</section><section><h2 id="install-dependencies">Install dependencies</h2>
+<p>Run these two commands:</p>
+<pre><code>$ npm install -g gulp
+</code></pre><pre><code>$ npm install
+</code></pre></section><section><h2 id="what-just-happened-">What just happened?</h2>
+<p>First up, we installed gulp. The <code>-g</code> switch told npm to install it globally so any future node app can have access to it. </p>
+</section><section><h2 id="what-just-happened-">What just happened?</h2>
+<p>Next, we installed our application dependencies. The <code>package.json</code> file defines information about our node app. It includes things like who wrote it, where you can find it&#39;s source code, and libraries that app depends on. Gulp stores information about it&#39;s plugins in &#39;dev dependencies&#39;. It looks like this: </p>
+<pre><code>&quot;devDependencies&quot;: {
+    &quot;gulp&quot;: &quot;~3.8.6&quot;,
+    &quot;gulp-minify-css&quot;: &quot;~0.3.8&quot;,
+    &quot;gulp-less-sourcemap&quot;: &quot;~1.3.3&quot;,
+    &quot;gulp-concat&quot;: &quot;~2.4.0&quot;,
+    &quot;gulp-uglify&quot;: &quot;~1.0.1&quot;
+  }
+</code></pre></section><section><h2 id="what-just-happened-">What just happened?</h2>
+<p>The <code>devDependencies</code> object tells node which packages to fetch for a dev build, meaning these will <strong>not</strong> be installed if you deploy to a production server like <a href="http://heroku.com">heroku</a>. For those familiar with ruby, a <em>node package</em> is like a <em>ruby gem</em>. Unlike ruby gems, a node package is only installed for one app in one directory, unless installed globally with <code>-g</code>. </p>
+</section><section><h2 id="lets-add-another-dependency">Lets add another dependency</h2>
+<p>Head on over to the <a href="http://gulpjs.com/plugins/">gulp plugin</a> page, and search for <code>gulp-serve</code>. Clicking on <code>gulp-serve</code> in the list below will take you to the node package <a href="https://www.npmjs.org/package/gulp-serve/">registry entry</a> that tells you how to use the plugin.</p>
+</section><section><h2 id="lets-add-another-dependency">Lets add another dependency</h2>
+<p>Notice the terminal command front and center at the top of the page: <code>npm install gulp-serve</code>. This is the general command to install <code>gulp-serve</code>. In order to also save a reference to <code>gulp-serve</code> in our <code>package.json</code> file (so that it can be intalled with <code>npm install</code> in the future, we need to modify the terminal command to read: </p>
+<pre><code>$ npm install gulp-serve --save-dev
+</code></pre><p>The <code>--save-dev</code> switch tells npm to also save a reference to this intall command in the dev dependecies list. </p>
+</section><section><h1 id="whew">Whew</h1>
+<p>Ok, we&#39;re all set up. For those familiar with node, this should be no sweat. For those who are working with node for the first time, we just covered a lot of ground. Let&#39;s do a quick recap.</p>
+</section><section><h2 id="recap-concepts">Recap - concepts</h2>
+<ul>
+<li>Gulp is a streaming build system for node.js</li>
+<li>Node is a server technology that lets you write server functionality with javascript </li>
+<li>NPM is the <em>Node Package Manager</em>, and is used to install libraries your app depends on</li>
+<li>We interact with <em>node</em> and <em>npm</em> via the <em>terminal</em> (or windows command line)</li>
+<li>Node apps can store references to npm libraries via the <code>package.json</code> file</li>
+<li>Gulp stores <em>it&#39;s</em> dependencies under the &#39;devDependencies&#39; section</li>
+</ul>
+</section><section><h2 id="recap-actions">Recap - actions</h2>
+<ul>
+<li><code>$ npm install -g gulp</code> to install gulp for the first time</li>
+<li><code>npm install</code> to have node fetch all the packages specified in <code>package.json</code></li>
+<li>Install a gulp plugin and save it locally with <code>$ npm install -g gulp-plugin-name</code></li>
+</ul>
+<ul>
+<li>Here’s a canned sample project that we’ll put through a build process together<ul>
+<li>a tour of the gulp plugin space</li>
+<li>concepts of NPM and package management</li>
+<li>using plugins in gulp</li>
+<li>the handful of plugins you’ll use for every project</li>
+<li>??? (there’s more to dig into here. We’ll see what time allows for)</li>
+</ul>
+</li>
+<li>Questions? </li>
+<li>Go forth and conquer the world (drinks next door if you want to chat more)</li>
+</ul>
+<p>People who are a good fit for a workshop like this probably work in front end design/dev, are comfortable writing javascript, have built projects complex enough to require JS/CSS compiling, and can find their way around a command line. </p>
+<p>As far as dates, my schedule would accommodate late October and beyond. </p>
+<p>How does that sound? For those who don’t know node, this will also kinda be a crash course in that too, even though you don’t have to understand <em>too</em> much about node to use gulp. </p>
 </section>
+      </div>
+    </div>
+    <script type="text/javascript" src="scripts/reveal.min.js"></script>
+    <script>
+
+      Reveal.initialize({
+          controls: true,
+          progress: true,
+          history: true,
+          center: true,
+
+          theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+          transition: Reveal.getQueryHash().transition || 'default'
+      });
+    </script>
   </body>
 </html>

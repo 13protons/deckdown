@@ -2,17 +2,34 @@
 
 <html>
   <head>
-    <title>Deck title</title>
-    
+    <title>Deckdown Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="styles/reveal.min.css">
+    <link rel="stylesheet" href="styles/theme/simple.css" id="theme">
     <style>
-      .slide {
-        background-color: #eee;
-        padding: 2rem;
-        margin: 2rem;
-      }
+      
     </style>
   </head>
   <body>
-    <%- contents %>
+    <div class="reveal">
+      <div class="slides">
+        <%- content %>
+      </div>
+    </div>
+    <script type="text/javascript" src="scripts/reveal.min.js"></script>
+    <script>
+
+      Reveal.initialize({
+          controls: true,
+          progress: true,
+          history: true,
+          center: true,
+
+          theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+          transition: Reveal.getQueryHash().transition || 'default'
+      });
+    </script>
   </body>
 </html>
