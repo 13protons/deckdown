@@ -1,41 +1,67 @@
 var fs = require("fs")
   , ejs = require('ejs')
   , marked = require('marked')
-  , diveSync = require("diveSync")
-  , extend = require('node.extend');
+  , extend = require('node.extend')
+  , path = require('path')
+  , express = require('express')
+  , request = require('request')
+  , app = express();
 
 
-//load the template
+//load the templates
 var template = {
-  main: fs.readFileSync(process.cwd() + "/templates/default/index.html", "utf8"), 
-  slides: fs.readFileSync(process.cwd() + "/templates/default/masters/default.html", "utf8")
+  main: fs.readFileSync(process.cwd() + "/templates/index.html", "utf8"), 
+  slides: fs.readFileSync(process.cwd() + "/templates/masters/default.html", "utf8")
 };
+var timer = Date.now();
 
-console.log(template);
+app.engine('.html', require('ejs').__express);
+app.set('views', __dirname + '/templates');
+app.set('view engine', 'html');
 
-//load and breakup markdown file
+app.use(express.static(path.join(__dirname, 'public'))); //  "public" off of current is root
 
-fs.readFile(process.cwd() + "/pres/test.md", "utf8", function(error, data) {
-  var rawSlides = mdToHtmlArray(data);
-  //combine
-  var slides = rawSlides.map(function(slide, i){
-    return ejs.render(template.slides, {
-      content: slide.content
-    });
-  });
-  var deck = ejs.render(template.main, {
-    content: slides.join("")
-  });
-  console.log(deck);   
-  
-  fs.writeFile(process.cwd() + '/pres/test.html', deck, function (err) {
-      if (err) throw err;
-      console.log('It\'s saved!');
-    });
-  
-});  
+app.use('/deck', function(req, res, next){
+  timer = Date.now();
+  request(req.param('src'), function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      //Get the name of the deck
+      var _names = req.param('src').match(/[A-Z,a-z]+/g);
+      var rawSlides = mdToHtmlArray(body);
+      //combine
+      var slides = rawSlides.map(function(slide, i){
+        return ejs.render(template.slides, {
+          content: slide.content
+        });
+      });
+      res.deck = { 
+        title: _names[_names.length - 2], 
+        template: 'default', 
+        content: slides.join("")
+      }
+      next();
+    }else {
+      //load default slide deck
+      res.deck = {
+        title: 'no data', 
+        template: 'default', 
+        content:"<section><h1>Deck not found</h1></section>"
+      }
+      next();
+    }
+  })
 
- 
+});
+
+app.get('/deck', function (req, res) {
+  console.log('generated deck in ' + (Date.now() - timer) + 'ms');
+  res.render('index', res.deck);
+});
+
+var port = process.env.PORT || 3000;
+app.listen(port);
+
+console.log('Listening on port %d', port);
 
 
 //functions
@@ -64,29 +90,6 @@ function mdToHtmlArray(markdown){
     return slides;
   }
 
-  
-  //console.log(slides);
-  /*
-  var output = "";
-  slides.forEach(function(slide, i){
-    if(slide.length > 0){
-      output += '<section id="slide_' + i + '" class="slide"><h' + slide + '\r\n</section>'
-    }
-  });
-  
-  
-  fs.readFile(path, "utf8", function(error, data) {
-    var deck = ejs.render(data, {
-        filename: path,
-        contents: output
-      });
-    fs.writeFile('pres/test.html', deck, function (err) {
-      if (err) throw err;
-      console.log('It\'s saved!');
-    });
-    
-  });
-  */
   
 
 
