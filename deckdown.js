@@ -55,7 +55,7 @@ app.use('/deck', function(req, res, next){
 
 app.get('/deck', function (req, res) {
   console.log('generated deck in ' + (Date.now() - timer) + 'ms');
-  res.render('index', res.deck);
+  res.render('deck', res.deck);
 });
 
 var port = process.env.PORT || 3000;
