@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public'))); //  "public" off of cur
 app.use('/deck', function(req, res, next){
   timer = Date.now();
   var url = req.param('src') || 'https://raw.githubusercontent.com/alanguir/deckdown/master/README.md'
-  
+  console.log(url);
   request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       //Get the name of the deck
@@ -53,6 +53,11 @@ app.use('/deck', function(req, res, next){
     }
   })
 
+});
+
+app.get('/deck', function (req, res) {
+  console.log('generated deck in ' + (Date.now() - timer) + 'ms');
+  res.render('deck', res.deck);
 });
 
 app.get('/', function (req, res) {
