@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <link rel="stylesheet" href="styles/pure-min.css">
+    <link rel="stylesheet" href="styles/grids-responsive-min.css">
     <link rel="stylesheet" href="styles/styles.css" type='text/css'>
     <style></style>
   </head>
@@ -16,54 +16,29 @@
       <div class="hero">
         <div class="main">
           <h1>Deckdown</h1>
-          <p>Deckdown is a totally new way to build a slide deck. You write markdown, and deckdown gives you a presentation.</p><p>No BS. Or JS. Or HTML.</p>
+          <p>Deckdown is a totally new way to build a slide deck. You write markdown, and deckdown gives you a presentation.</p><p><strong>No BS. Or JS. Or HTML.</strong></p>
         </div>
         <div class="tryit pure-g">
-          <form action="/deck" method="post" class="pure-form pure-u-1 pure-u-md-1-2">
+          <form action="/deck" method="post" class="pure-form pure-u-1 pure-u-md-11-24">
             <fieldset class="md-form">
-              <h2>Paste in some markdown:</h2>
+              <h3>Type some markdown</h3>
               <textarea name="markdown" class="markdown pure-u-1"></textarea>
               <button type="submit" class="pure-button pure-button-primary">Create Deck</button>
             </fieldset>
           </form>
-          
-          <form action="/deck" method="get" class="pure-form pure-u-1 pure-u-md-1-2">
+          <div class="pure-u-1 pure-u-md-1-12 separator"><h3>-or-</h3></div>
+          <form action="/deck" method="get" class="pure-form pure-u-1 pure-u-md-11-24">
             <fieldset>
-              <h2>Paste in a markdown file's url:</h2>
+              <h3>Specify a markdown file's url</h3>
               <input type="text" name="src" placeholder="any public url that points to a valid markdown file" class="pure-input-1" value="https://raw.githubusercontent.com/alanguir/deckdown/master/deckdownis.md"/>
               <button type="submit" class="pure-button pure-button-primary">Create Deck</button>
             </fieldset>
           </form>
           
-          
-          
-          <p class="fineprint pure-u-1">Note: This must be an actual <code>.md</code> file. For github, this means copying the url after clicking the 'raw' button near the top of a file's page. </p>
         </div>
       </div>
       <div class="content">
-        <h2 id="usage">Usage</h2>
-        <h3>From text</h3>
-
-<p>Type or paste markdown into the form above, and hit 'create deck'. Valid markdown will be parsed into a deck for you to enjoy. Deckdown currently doesn't save the markdown text that you submit to it so this is a one time, unique thing. </p>
-
-<h3>From A file</h3>
-
-<p>Tell deckdown the url of your raw <code>.md</code> file by passing it as the <code>src</code> parameter, like this: </p>
-
-<pre><code>http://deckdown.herokuapp.com/deck?src=path/to/yourdeck.md
-</code></pre>
-
-<p>For example, here's a slideshow version of the <a href="http://deckdown.herokuapp.com/deck?src=https://raw.githubusercontent.com/alanguir/deckdown/master/README.md#/">deckdown readme</a>.</p>
-
-<p>For github files commit your <code>.md</code> file to your repo, then navigate to the markdown file on github and click 'raw' in the upper right corner to view the raw markdown file. Use <em>this</em> url to dive to deckdown. </p>
-
-<p>For dropbox, place the markdown file in your <em>Public</em> folder, then right/option click to get it's public link. More info on public links from <a href="https://www.dropbox.com/help/16">dropbox help</a></p>
-        
-        <h2 id="caveats">Caveats</h2>
-        <p>Deckdown is still in an early experimental state. Feel free to use it for your presentations if you wish, just know that the service will likely change in the future. </p>
-        <h2 id="contribute">Contribute</h2>
-        <p>Deckdown is <a href="https://github.com/alanguir/deckdown">on github</a></p>
-        <p>Made by <a href="https://github.com/alanguir">Alan Languirand</a> in 2014.</p>
+        <%- content %>
       </div> 
     </div>
   </body>

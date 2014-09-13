@@ -9,33 +9,34 @@ body{
   margin: 0 auto;
   .hero {
     padding: 2rem 1rem;
-  
+    @media @md {padding: 2rem 0;}
   }
+  
   .content, .hero .main, .hero .tryit{
-    padding: 1rem;
-
     @media @md {
       width: 80%;
       margin: 0 auto;
     }
-  
   }
-  
+  .content {
+    padding: 1rem;
+    p {max-width: 35rem;}
+  }
   
 }
 
 h1, h2, h3, h4 {
   font-weight: 400;
-  border-bottom: 1px solid #eee;
+  
 }
-h1 {border-bottom: 0px solid #eee;}
+h2 {border-bottom: 1px solid #eee;}
 
 code {
   background-color: #eee;
   border-radius: .25rem;
   font-family: monospace;
-  font-size: 1.2em;
-  padding: .2rem .5rem;
+  font-size: 1.1em;
+  padding: .1rem .3rem;
 }
 pre {
   padding: 1rem 0;
@@ -51,7 +52,7 @@ a {font-weight: 400;}
 .hero {
   color: #fff;
   background-color: #000;
-  text-align: center;
+  @media @md {text-align: center;}
   background: radial-gradient(#666 5%, black 100%); /* Standard syntax */
   
   .main {
@@ -64,14 +65,18 @@ a {font-weight: 400;}
       
       text-shadow:0px 0px 0 rgb(205,205,205),0px 1px 0 rgb(180,180,180),0px 2px 0 rgb(155,155,155),0px 3px 0 rgb(129,129,129),0px 4px 0 rgb(104,104,104),0px 5px 0 rgb(79,79,79), 0px 6px 0 rgb(54,54,54),0px 7px 6px rgba(0,0,0,0.6),0px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
     }
-    p {font-size: 1rem; @media @md {font-size: 1.5rem;}}
+    p {font-size: 1.5rem;}
   }
   .tryit {
+    input, textarea {font-family: monospace;}
     text-align: left;
     h2{border-bottom: none;}
     button {margin-top: 1rem;}
-    fieldset {@media @md {padding-left: 1rem;}}
-    .md-form {@media @md {padding: 0 1rem 0 0;}}
+    .separator {
+      text-align: center;
+      color: #aaa;
+      padding-top:.35em;
+    }
   }
 
 }

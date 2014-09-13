@@ -5,7 +5,9 @@ Write markdown, get a slide deck. No BS. Or JS. Or HTML.
 
 ##Vision
 
-Deckdown is for breaking out of slideware jail. I love tools like reveal.js (it's even used in this project), but the PROCESS of using it feels like trading the bloat of powerpoint for the pain of writing code when we all really just want to be writing content. 
+Deckdown is for breaking out of slideware jail. Traditional slideware is hard to proofread, and tweaking text size and alignment on large decks feels like a waste of time. I love reveal.js (it's used in this project), but the PROCESS of writing markup around my content in order to present it feels like a new flavor of the old slideware bloat. 
+
+Deckdown changes all that by taking the contents of a single text file and turning it into a completely acceptable and usable slide deck. I hope you enjoy using it. 
 
 ##How it works
 
