@@ -7,6 +7,7 @@ var fs = require("fs")
   , express = require('express')
   , request = require('request')
   , querystring = require('querystring')
+  , bodyParser = require('body-parser')
   , app = express();
 
 
@@ -30,22 +31,17 @@ app.use('/deck', function(req, res, next){
   timer = Date.now();
   var url = req.param('src') || 'https://raw.githubusercontent.com/alanguir/deckdown/master/README.md'
   url = querystring.unescape(url);
+  
   console.log(url);
   request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       //Get the name of the deck
       var _names = url.match(/[A-Z,a-z]+/g);
-      var rawSlides = mdToHtmlArray(body);
-      //combine
-      var slides = rawSlides.map(function(slide, i){
-        return ejs.render(template.slides, {
-          content: slide.content
-        });
-      });
+      
       res.deck = { 
         title: _names[_names.length - 2], 
         template: 'default', 
-        content: slides.join("")
+        content: slides(body)
       }
       next();
     }else {
@@ -71,6 +67,18 @@ app.get('/', function (req, res) {
   res.render('index', {content: marked(page)});
 });
 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.post('/deck', function(req, res){
+  console.log(req.param('markdown'));
+  var md = req.param('markdown', '##Invalid Markdown');
+  res.render('deck', {
+    title: 'Created With Deckdown',
+    template: 'default', 
+    content: slides(md)
+  });
+
+});
+
 var port = process.env.PORT || 3000;
 app.listen(port);
 
@@ -78,6 +86,19 @@ console.log('Listening on port %d', port);
 
 
 //functions
+function slides(body){
+  var rawSlides = mdToHtmlArray(body);
+  //combine
+  var slides = rawSlides.map(function(slide, i){
+    return ejs.render(template.slides, {
+      content: slide.content
+    });
+  });
+  return slides.join("");
+}
+
+
+
 
 function mdToHtmlArray(markdown){
     var html = marked(markdown);
