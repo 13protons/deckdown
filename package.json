@@ -21,7 +21,9 @@
     "node.extend": "~1.1.2",
     "express": "~4.9.0",
     "path": "~0.4.9",
-    "request": "~2.42.0"
+    "request": "~2.42.0",
+    "querystring": "~0.2.0",
+    "less-middleware": "~1.0.4"
   },
   "engines": {
     "node": ">= 0.10.0",

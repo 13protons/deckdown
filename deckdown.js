@@ -1,10 +1,12 @@
 var fs = require("fs")
   , ejs = require('ejs')
+  , lessMiddleware = require('less-middleware')
   , marked = require('marked')
   , extend = require('node.extend')
   , path = require('path')
   , express = require('express')
   , request = require('request')
+  , querystring = require('querystring')
   , app = express();
 
 
@@ -19,11 +21,15 @@ app.engine('.html', require('ejs').__express);
 app.set('views', __dirname + '/templates');
 app.set('view engine', 'html');
 
+//less is more? 
+app.use(lessMiddleware(path.join(__dirname, '/public')));
+
 app.use(express.static(path.join(__dirname, 'public'))); //  "public" off of current is root
 
 app.use('/deck', function(req, res, next){
   timer = Date.now();
   var url = req.param('src') || 'https://raw.githubusercontent.com/alanguir/deckdown/master/README.md'
+  url = querystring.unescape(url);
   console.log(url);
   request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {

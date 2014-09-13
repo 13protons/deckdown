@@ -4,40 +4,42 @@
   <head>
     <title>Deckdown</title>
     <meta charset="utf-8">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
-    <style>
-      body{ 
-        font-family: 'Open Sans', sans-serif; 
-      }
-      
-      .page {
-        width: 80%; margin: 0 auto;
-      }
-      h1, h2, h3, h4 {
-        font-weight: 300;
-        border-bottom: 1px solid #eee;
-      }
-      code {
-        background-color: #eee;
-        border-radius: .25rem;
-        font-family: monospace;
-        font-size: 1.2em;
-        padding: .2rem .5rem;
-      }
-      pre {padding: 1rem 0;}
-      pre code  {
-        padding: 1rem;
-      }
-      
-      
-      
-      
-    </style>
+    <link rel="stylesheet" href="styles/styles.css" type='text/css'>
+    <style></style>
   </head>
   <body>
     <div class="page">
-      <%- content %>
+      <div class="hero">
+        <div class="main">
+          <h1>Deckdown</h1>
+          <p>Deckdown is a totally new way to build a slide deck. You write markdown, and deckdown gives you a presentation.</p><p>No BS. Or JS. Or HTML.</p>
+        </div>
+        <div class="tryit">
+          <h2>Try It: </h2>
+          <form action="/deck" method="get" class="pure-form">
+            <fieldset>
+              <input type="text" name="src" placeholder="any public url that points to a valid markdown file" class="pure-input-1" value="https://raw.githubusercontent.com/alanguir/deckdown/master/deckdownis.md"/>
+              <button type="submit" class="pure-button pure-button-primary">Create Deck</button>
+            </fieldset>
+          </form>
+          <p class="fineprint">Note: This must be an actual <code>.md</code> file. For github, this means copying the url after clicking the 'raw' button near the top of a file's page. </p>
+        </div>
+      </div>
+      <div class="content">
+        <h2 id="usage">Usage</h2>
+        <p>Tell deckdown the url of your raw <code>.md</code> file by passing it as the <code>src</code> parameter, like this: </p>
+        <pre><code>http://deckdown.herokuapp.com/deck?src=path/to/yourdeck.md
+        </code></pre><p>For example, here's a slideshow version of the <a href="/deck?src=https://raw.githubusercontent.com/alanguir/deckdown/master/README.md#/">deckdown readme</a>.</p>
+        
+        <h2 id="caveats">Caveats</h2>
+        <p>Deckdown is still in an early experimental state. Feel free to use it for your presentations if you wish, just know that the service will likely change in the future. </p>
+        <h2 id="contribute">Contribute</h2>
+        <p>Deckdown is <a href="https://github.com/alanguir/deckdown">on github</a></p>
+        <p>Made by <a href="https://github.com/alanguir">Alan Languirand</a> in 2014.</p>
+      </div> 
     </div>
   </body>
 </html>

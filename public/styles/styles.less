@@ -1,0 +1,75 @@
+@import 'breakpoints.less';
+
+body{ 
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 200;
+}
+      
+.page {
+  margin: 0 auto;
+  .hero {
+    padding: 2rem 1rem;
+  
+  }
+  .content, .hero .main, .hero .tryit{
+    padding: 1rem;
+
+    @media @md {
+      width: 80%;
+      margin: 0 auto;
+    }
+  
+  }
+  
+  
+}
+
+h1, h2, h3, h4 {
+  font-weight: 400;
+  border-bottom: 1px solid #eee;
+}
+h1 {border-bottom: 0px solid #eee;}
+
+code {
+  background-color: #eee;
+  border-radius: .25rem;
+  font-family: monospace;
+  font-size: 1.2em;
+  padding: .2rem .5rem;
+}
+pre {
+  padding: 1rem 0;
+  background-color: #eee;
+ code {
+    padding: 1rem;
+    background-color: transparent;
+  }
+}
+a {font-weight: 400;}
+.fineprint {font-size: .8em; color: #888;}
+
+.hero {
+  color: #fff;
+  background-color: #000;
+  text-align: center;
+  background: radial-gradient(#666 5%, black 100%); /* Standard syntax */
+  
+  .main {
+    h1 {
+      text-transform: uppercase; 
+      font-weight: 700;
+      font-size: 3rem;
+      margin: 0;
+      @media @md {font-size: 5rem;}
+      
+      text-shadow:0px 0px 0 rgb(205,205,205),0px 1px 0 rgb(180,180,180),0px 2px 0 rgb(155,155,155),0px 3px 0 rgb(129,129,129),0px 4px 0 rgb(104,104,104),0px 5px 0 rgb(79,79,79), 0px 6px 0 rgb(54,54,54),0px 7px 6px rgba(0,0,0,0.6),0px 7px 1px rgba(0,0,0,0.5),0px 0px 6px rgba(0,0,0,.2);
+    }
+    p {font-size: 1rem; @media @md {font-size: 1.5rem;}}
+  }
+  .tryit {
+    text-align: left;
+    h2{border-bottom: none;}
+    button {margin-top: 1rem;}
+  }
+
+}
