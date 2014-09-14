@@ -1,9 +1,13 @@
 deckdown
 ========
 
+![Deckdown](http://deckdown.org/images/deckdown.png)
+
 Write markdown, get a slide deck. No BS. Or JS. Or HTML.
 
 Try it at http://deckdown.org
+
+***
 
 ##Usage
 
@@ -37,7 +41,19 @@ Deckdown changes all that by taking the contents of a single text file and turni
 Presentations that include code examples may never be the same. I hope you enjoy using deckdown.
 
 ##How it works
-Deckdown breaks your markdown file into slides based on headers. It does this with *regex*, and it splits up your file **after** converting it to html. This means html header tags `<h1> - <h6>` become the slide delimiters. 
+Deckdown breaks your markdown file into slides based on headers and horizontal rules. It does this with *regex*, and it splits up your file **after** converting it to html. This means html header tags `<h1> - <h6>` and `<hr>` become the slide delimiters. 
+
+When writing your markdown:
+
+```
+This Creates a New Slide
+========================
+
+#So does this
+
+***
+(That one does too)
+```
 
 Markdown conversion is done with [marked](https://github.com/chjj/marked), and uses [GFM](https://help.github.com/articles/github-flavored-markdown) by default. 
 
@@ -52,11 +68,9 @@ Deckdown is still in an early experimental state. Feel free to use it for your p
   * Overflowing Content
   
     Right now, it’s up to the markdown author to anticipate overflowing content, and to chunk accordingly. 
-  * Slides of text
-  
-    Non-heading delimiters are currently not implemented, so each slide in deckdown *needs* a heading (or it won’t be it’s own slide).
+
 
 ##Contribute
 Deckdown is on [github](http://github.com/alanguir/deckdown).
 
-Created by [Alan Languirand](http://github.com/alanguir/) in 2014.
+Created 2014 by [Alan Languirand](http://github.com/alanguir/). [MIT license](/blob/master/LICENSE).
