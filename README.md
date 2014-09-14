@@ -3,6 +3,8 @@ deckdown
 
 Write markdown, get a slide deck. No BS. Or JS. Or HTML.
 
+Try it at http://deckdown.org
+
 ##Usage
 
 ###From Text
