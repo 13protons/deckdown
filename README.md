@@ -6,7 +6,7 @@ Write markdown, get a slide deck. No BS. Or JS. Or HTML.
 ##Usage
 
 ###From Text
-Type or paste [markdown](http://website.com) into the form above, and hit 'create deck'. Valid markdown will be parsed into a deck for you to enjoy. Deckdown currently doesn't save the markdown text that you submit to it so this is a one time, unique thing.
+Type or paste [markdown](http://daringfireball.net/projects/markdown/syntax) into the form above, and hit 'create deck'. Valid markdown will be parsed into a deck for you to enjoy. Deckdown currently doesn't save the markdown text that you submit to it so this is a one time, unique thing.
 
 ###From A File
 Tell deckdown the url of your raw `.md` file by passing it as the `src` parameter, like this:
@@ -37,7 +37,7 @@ Presentations that include code examples may never be the same. I hope you enjoy
 ##How it works
 Deckdown breaks your markdown file into slides based on headers. It does this with *regex*, and it splits up your file **after** converting it to html. This means html header tags `<h1> - <h6>` become the slide delimiters. 
 
-Markdown conversion is done with [marked](http://website.com), and uses [GFM](http://website.com) by default. 
+Markdown conversion is done with [marked](https://github.com/chjj/marked), and uses [GFM](https://help.github.com/articles/github-flavored-markdown) by default. 
 
 If you think you’ve run into a regex failure, please [report it](https://github.com/alanguir/deckdown/issues). 
 
