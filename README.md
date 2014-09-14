@@ -73,4 +73,4 @@ Deckdown is still in an early experimental state. Feel free to use it for your p
 ##Contribute
 Deckdown is on [github](http://github.com/alanguir/deckdown).
 
-Created 2014 by [Alan Languirand](http://github.com/alanguir/). [MIT license](/blob/master/LICENSE).
+Created 2014 by [Alan Languirand](http://github.com/alanguir/). [MIT license](/LICENSE).
