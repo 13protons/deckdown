@@ -8,9 +8,14 @@
 
     <link rel="stylesheet" href="styles/reveal.min.css">
     <link rel="stylesheet" href="styles/theme/<%= template %>.css" id="theme">
-    <style>
       
-    </style>
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/monokai_sublime.css">  
+    
+    <style>
+      .reveal pre {padding: 1rem; background-color: #272822; }
+    </style>    
+      
   </head>
   <body>
     <div class="reveal">
@@ -18,18 +23,30 @@
         <%- content %>
       </div>
     </div>
+    
+    <script type="text/javascript" src="lib/js/head.min.js"></script>
     <script type="text/javascript" src="scripts/reveal.min.js"></script>
     <script>
 
       Reveal.initialize({
           controls: true,
           progress: true,
-          history: true,
+          history: false,
           center: true,
-
+          previewLinks: false,
+          touch: true,
+          slideNumber: false,
+          keyboard: true,
+          overview: true,
+      
           theme: Reveal.getQueryHash().theme, // available themes are in /styles/theme
-          transition: Reveal.getQueryHash().transition || 'default'
+          transition: Reveal.getQueryHash().transition || 'default'         
+
       });
+      
+ 
+      
+      
     </script>
   </body>
 </html>

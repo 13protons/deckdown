@@ -11,6 +11,12 @@ var fs = require("fs")
   , app = express();
 
 
+marked.setOptions({
+  highlight: function (code) {
+    return require('highlight.js').highlightAuto(code).value;
+  }
+});
+
 //load the templates
 var template = {
   main: fs.readFileSync(process.cwd() + "/templates/index.html", "utf8"), 
