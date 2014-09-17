@@ -69,13 +69,14 @@ a {font-weight: 400;}
   .tryit {
     input, textarea {font-family: monospace;}
     text-align: left;
-    h3{font-weight: 200;}
-    button {margin-top: 1rem;}
-    .separator {
+    h3{
+      font-weight: 200; 
+      color: #ccc; 
+      font-size: 1.1rem;
       @media @md {text-align: center;}
-      color: #aaa;
-      padding-top:.35em;
     }
+    .controls, button {margin-top: 1rem;}
+    .submit {@media @md {text-align: right;}}
   }
 
 }

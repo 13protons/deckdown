@@ -19,21 +19,35 @@
           <p>Deckdown is a totally new way to build a slide deck. You write markdown, and deckdown gives you a presentation.</p><p><strong>No BS. Or JS. Or HTML.</strong></p>
         </div>
         <div class="tryit pure-g">
-          <form action="/deck" method="post" class="pure-form pure-u-1 pure-u-md-11-24">
-            <fieldset class="md-form">
-              <h3>Type some markdown</h3>
-              <textarea name="markdown" class="markdown pure-u-1"></textarea>
-              <button type="submit" class="pure-button pure-button-primary">Create Deck</button>
-            </fieldset>
+          <form action="/deck" method="post" class="pure-form pure-u-1">
+            
+              <h3>Enter a markdown file's url, or just type some markdown</h3>
+              <textarea name="markdown" class="markdown pure-u-1" rows="8" required></textarea>
+              <div class="pure-g">
+              <div class="pure-u-1 pure-u-md-3-4 controls">
+                <label for="theme">Theme:</label>
+                <select id="state" name="theme">
+
+                    <option value="beige">beige</option>
+                    <option value="blood">blood</option>
+                    <option value="default" selected>default</option>
+                    <option value="moon">moon</option>
+                    <option value="night">night</option>
+                    <option value="serif">serif</option>
+                    <option value="simple">simple</option>
+                    <option value="sky">sky</option>
+                    <option value="solarized">solarized</option>
+
+                </select>
+              </div>
+              <div class="pure-u-1 pure-u-md-1-4 submit">
+                <button type="submit" class="pure-button pure-button-primary">
+                  Create Deck
+                </button>
+              </div>
+            </div>
           </form>
-          <div class="pure-u-1 pure-u-md-1-12 separator"><h3>-or-</h3></div>
-          <form action="/deck" method="get" class="pure-form pure-u-1 pure-u-md-11-24">
-            <fieldset>
-              <h3>Specify a markdown file's url</h3>
-              <input type="text" name="src" placeholder="any public url that points to a valid markdown file" class="pure-input-1" value="https://raw.githubusercontent.com/alanguir/deckdown/master/deckdownis.md"/>
-              <button type="submit" class="pure-button pure-button-primary">Create Deck</button>
-            </fieldset>
-          </form>
+          
           
         </div>
       </div>
