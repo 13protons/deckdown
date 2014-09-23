@@ -11,7 +11,6 @@ var fs = require("fs")
   , validator = require('validator')
   , app = express();
 
-
 marked.setOptions({
   highlight: function (code) {
     return require('highlight.js').highlightAuto(code).value;
@@ -71,7 +70,7 @@ console.log('Listening on port %d', port);
 function getDeckCtrl(req, res, next){
   var url = req.param('src') || res.deckUrl;
   if(req.param('theme')){res.deck.template = req.param('theme'); }
-  
+  url = encodeURI(url);
   if(validator.isURL(url, {allow_underscores: true })){
     url = querystring.unescape(url);
     request(url, function (error, response, body) {
@@ -90,7 +89,7 @@ function getDeckCtrl(req, res, next){
     });
   }
   else{
-    console.log('invalid url');
+    console.log('invalid url: ', url);
     gen();
     res.render('deck', res.deck);
   }
@@ -119,12 +118,17 @@ function postDeckCtrl (req, res, next){
 
 function slides(body){
   var rawSlides = mdToHtmlArray(body);
+  
+  console.log(rawSlides);
+  
   //combine
   var slides = rawSlides.map(function(slide, i){
     return ejs.render(template.slides, {
       content: slide.content
     });
   });
+  
+  
   return slides.join("");
 }
 
@@ -133,6 +137,29 @@ function gen(){
 }
 
 function mdToHtmlArray(markdown){
+    console.log(markdown);
+  /*
+
+match within a +()
+/(\+\()(.*)(\))/g $2
+
+match the whole +()
+/\+\(.*\)/g $&
+
+*/
+    //var properties = markdown.match($2)
+    //var matches, properties = [];
+   
+    properties = markdown.match(/\+\(.*\)/g);
+  
+    if(properties){
+      properties.forEach(function(p, i){
+        //remove +()
+        p = p.replace(/[(\+\()(\))]/g, '').split(',');;
+        console.log(p);
+      });
+    }
+    //console.log(properties);
     var html = marked(markdown);
     //Array of values we need to prepend after the split
     var headers = html.match(/(<h[1-6])|(<hr>)/g); 

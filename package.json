@@ -17,7 +17,6 @@
     "marked": "~0.3.2",
     "ejs": "~1.0.0",
     "dive": "~0.3.1",
-    "diveSync": "~0.2.1",
     "node.extend": "~1.1.2",
     "express": "~4.9.0",
     "path": "~0.4.9",
@@ -26,7 +25,9 @@
     "less-middleware": "~1.0.4",
     "body-parser": "~1.8.1",
     "highlight.js": "~8.2.0",
-    "validator": "~3.18.1"
+    "validator": "~3.18.1",
+    "lwip": "",
+    "kramed": ""
   },
   "engines": {
     "node": ">= 0.10.0",
