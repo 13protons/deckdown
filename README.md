@@ -7,8 +7,6 @@ Write markdown, get a slide deck. No BS. Or JS. Or HTML.
 
 Try it at http://deckdown.org
 
-***
-
 ##Usage
 
 ###From Text
@@ -55,9 +53,7 @@ This Creates a New Slide
 (That one does too)
 ```
 
-Markdown conversion is done with [marked](https://github.com/chjj/marked), and uses [GFM](https://help.github.com/articles/github-flavored-markdown) by default. 
-
-If you think you’ve run into a regex failure, please [report it](https://github.com/alanguir/deckdown/issues). 
+Markdown conversion is done with [kramed](https://github.com/GitbookIO/kramed), and uses [GFM](https://help.github.com/articles/github-flavored-markdown) by default.  
 
 ##Known issues
 Deckdown is still in an early experimental state. Feel free to use it for your presentations if you wish, just know that sailing is not yet a smooth as it could be. Here are some of the bigger issues keeping deckdown from taking the world by storm:

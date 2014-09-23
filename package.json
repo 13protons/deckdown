@@ -26,8 +26,9 @@
     "body-parser": "~1.8.1",
     "highlight.js": "~8.2.0",
     "validator": "~3.18.1",
-    "lwip": "",
-    "kramed": ""
+    "lwip": "0.0.4",
+    "kramed": "~0.4.2",
+    "node-persist": "0.0.2"
   },
   "engines": {
     "node": ">= 0.10.0",

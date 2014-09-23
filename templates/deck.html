@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="styles/theme/<%= template %>.css" id="theme">
       
     <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="lib/css/monokai_sublime.css">  
+    <link rel="stylesheet" href="styles/hltheme/monokai_sublime.css">  
     
     <style>
-      .reveal pre {padding: 1rem; background-color: #272822; }
+      /*.reveal pre {padding: 1rem; background-color: #272822; }*/ 
     </style>    
       
   </head>
@@ -26,27 +26,45 @@
     
     <script type="text/javascript" src="lib/js/head.min.js"></script>
     <script type="text/javascript" src="scripts/reveal.min.js"></script>
-    <script>
-
-      Reveal.initialize({
-          controls: true,
-          progress: true,
-          history: true,
-          center: true,
-          previewLinks: false,
-          touch: true,
-          slideNumber: false,
-          keyboard: true,
-          overview: true,
+    <script type="text/javascript" src="scripts/highlight.pack.js"></script>
       
-          theme: Reveal.getQueryHash().theme, // available themes are in /styles/theme
-          transition: Reveal.getQueryHash().transition || 'default'         
+    <script>
+      hljs.initHighlightingOnLoad();
+      
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        previewLinks: false,
+        touch: true,
+        slideNumber: false,
+        keyboard: true,
+        overview: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /styles/theme
+        transition: Reveal.getQueryHash().transition || 'default' ,       
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { 
+            return !document.body.classList; } 
+          },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() {
+            hljs.initHighlightingOnLoad(); } 
+          },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { 
+            return !!document.body.classList; } 
+          },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { 
+            return !!document.body.classList; } 
+          },
+          { src: '//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.10/socket.io.min.js', async: true },
+          { src: 'plugin/multiplex/master.js', async: true },
+          { src: 'plugin/notes-server/client.js', async: true }
+        ]
 
       });
-      
- 
-      
-      
+
     </script>
+    
   </body>
 </html>

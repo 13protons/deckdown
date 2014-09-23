@@ -1,7 +1,7 @@
 var fs = require("fs")
   , ejs = require('ejs')
   , lessMiddleware = require('less-middleware')
-  , marked = require('marked')
+  , kramed = require('kramed')
   , extend = require('node.extend')
   , path = require('path')
   , express = require('express')
@@ -11,10 +11,8 @@ var fs = require("fs")
   , validator = require('validator')
   , app = express();
 
-marked.setOptions({
-  highlight: function (code) {
-    return require('highlight.js').highlightAuto(code).value;
-  }
+kramed.setOptions({
+  
 });
 
 //load the templates
@@ -47,17 +45,20 @@ app.use('/deck', function(req, res, next){
 
 
 app.get('/', function (req, res) {
-  var page = marked(fs.readFileSync(process.cwd() + "/README.md", "utf8"));
-  //little hackey - removes anything before the first <hr>
-  page = page.split('<hr>'); page.shift()
-  page = page.join('<hr>');
-  
+  var page = kramed(fs.readFileSync(process.cwd() + "/README.md", "utf8"));
+  //little hackey - removes anything before the first <a>
+  page = '<p><a>' + page.substr(page.indexOf('</a>')) ;
+              
   res.render('index', {content: page});
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/deck', getDeckCtrl);
+app.get('/deck/:deckid/:view?', function(req,res){
+  console.log(req.params.deckid, req.params.view);
+  res.render('id', {id: req.params.deckid, mode: req.params.view});
+});
 app.post('/deck', postDeckCtrl, getDeckCtrl);
 
 var port = process.env.PORT || 3000;
@@ -124,6 +125,7 @@ function slides(body){
   //combine
   var slides = rawSlides.map(function(slide, i){
     return ejs.render(template.slides, {
+      master: 'master-'+slide.level,
       content: slide.content
     });
   });
@@ -160,7 +162,7 @@ match the whole +()
       });
     }
     //console.log(properties);
-    var html = marked(markdown);
+    var html = kramed(markdown);
     //Array of values we need to prepend after the split
     var headers = html.match(/(<h[1-6])|(<hr>)/g); 
     
