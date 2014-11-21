@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="styles/theme/<%= template %>.css" id="theme">
       
     <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="styles/hltheme/monokai_sublime.css">  
-    
+    <link rel="stylesheet" href="styles/prism.css">  
+      
     <style>
       /*.reveal pre {padding: 1rem; background-color: #272822; }*/ 
     </style>    
@@ -26,10 +26,9 @@
     
     <script type="text/javascript" src="lib/js/head.min.js"></script>
     <script type="text/javascript" src="scripts/reveal.min.js"></script>
-    <script type="text/javascript" src="scripts/highlight.pack.js"></script>
-      
+    <script type="text/javascript" src=""></script>
     <script>
-      hljs.initHighlightingOnLoad();
+      
       
       Reveal.initialize({
         controls: true,
@@ -48,10 +47,17 @@
           { src: 'lib/js/classList.js', condition: function() { 
             return !document.body.classList; } 
           },
-          { src: 'plugin/highlight/highlight.js', async: true, callback: function() {
-            hljs.initHighlightingOnLoad(); } 
-          },
-          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { 
+          { src: 'scripts/prism.js', async: true, callback: function() {
+            Prism.highlightAll();
+            } 
+          }
+        ]
+
+      });
+
+      
+      /*
+      { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { 
             return !!document.body.classList; } 
           },
           { src: 'plugin/notes/notes.js', async: true, condition: function() { 
@@ -59,11 +65,13 @@
           },
           { src: '//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.10/socket.io.min.js', async: true },
           { src: 'plugin/multiplex/master.js', async: true },
-          { src: 'plugin/notes-server/client.js', async: true }
-        ]
-
-      });
-
+          { src: 'plugin/notes-server/client.js', async: true },
+          
+          
+        */
+      
+      //hljs.initHighlightingOnLoad();
+      
     </script>
     
   </body>
