@@ -95,12 +95,16 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   color: #f8f8f2;
 }
 
+
+.hljs-built_in {
+  color: #66d9ef;
+}
+
 .hljs-string,
 .css .hljs-id,
 .hljs-subst,
 .hljs-type,
 .ruby .hljs-class .hljs-parent,
-.hljs-built_in,
 .django .hljs-template_tag,
 .django .hljs-variable,
 .smalltalk .hljs-class,

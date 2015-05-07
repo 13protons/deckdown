@@ -5,17 +5,17 @@
     <title><%= title %></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+      <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="styles/reveal.min.css">
     <link rel="stylesheet" href="styles/theme/<%= template %>.css" id="theme">
-      
+
     <!-- For syntax highlighting -->
-    <link rel="stylesheet" href="styles/prism.css">  
-      
+    <link rel="stylesheet" href="styles/hltheme/monokai_sublime.css">
+
     <style>
-      /*.reveal pre {padding: 1rem; background-color: #272822; }*/ 
-    </style>    
-      
+      /*.reveal pre {padding: 1rem; background-color: #272822; }*/
+    </style>
+
   </head>
   <body>
     <div class="reveal">
@@ -23,56 +23,82 @@
         <%- content %>
       </div>
     </div>
-    
+
     <script type="text/javascript" src="lib/js/head.min.js"></script>
     <script type="text/javascript" src="scripts/reveal.min.js"></script>
-    <script type="text/javascript" src=""></script>
+
+
     <script>
-      
-      
+
+
       Reveal.initialize({
         controls: true,
         progress: true,
         history: true,
         center: true,
-        previewLinks: false,
+        loop: true,
         touch: true,
-        slideNumber: false,
+        slideNumber: true,
         keyboard: true,
         overview: true,
+        /*
+        previewLinks: true,
+        autoSlide: 5500,
+        transitionSpeed: 'slow', */
 
         theme: Reveal.getQueryHash().theme, // available themes are in /styles/theme
-        transition: Reveal.getQueryHash().transition || 'default' ,       
+        transition: Reveal.getQueryHash().transition || 'concave' ,
         dependencies: [
-          { src: 'lib/js/classList.js', condition: function() { 
-            return !document.body.classList; } 
+          { src: 'lib/js/classList.js',
+            condition: function() {
+              return !document.body.classList;
+            }
           },
+          { src: 'plugin/highlight/highlight.js',
+           async: true,
+           callback: function() {
+             hljs.initHighlightingOnLoad();
+           }
+          },
+
+        { src: 'socket.io/socket.io.js', async: true },
+        { src: 'plugin/notes-server/client.js', async: true }
+/*
           { src: 'scripts/prism.js', async: true, callback: function() {
             Prism.highlightAll();
-            } 
-          }
+            }
+          }*/
         ]
 
       });
 
-      
+
       /*
-      { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { 
-            return !!document.body.classList; } 
+      { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() {
+            return !!document.body.classList; }
           },
-          { src: 'plugin/notes/notes.js', async: true, condition: function() { 
-            return !!document.body.classList; } 
+          { src: 'plugin/notes/notes.js', async: true, condition: function() {
+            return !!document.body.classList; }
           },
           { src: '//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.10/socket.io.min.js', async: true },
           { src: 'plugin/multiplex/master.js', async: true },
           { src: 'plugin/notes-server/client.js', async: true },
-          
-          
+
+
         */
-      
+
       //hljs.initHighlightingOnLoad();
-      
+
     </script>
-    
+
+    <script type="text/javascript" src="scripts/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.balancetext.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        //$('p').balanceText();
+      });
+
+    </script>
   </body>
 </html>

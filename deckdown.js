@@ -12,12 +12,11 @@ var fs = require("fs")
   , app = express();
 
 kramed.setOptions({
-  
+  'breaks': true
 });
 
 //load the templates
 var template = {
-  main: fs.readFileSync(process.cwd() + "/templates/index.html", "utf8"), 
   slides: fs.readFileSync(process.cwd() + "/templates/masters/default.html", "utf8")
 };
 var timer = Date.now();
