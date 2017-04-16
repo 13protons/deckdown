@@ -1,14 +1,14 @@
-#Welcome to Deckdown
+# Welcome to Deckdown
 
-##Deckdown is
+## Deckdown is
 a brand new way to create slide decks
 
 ***
 It take a markdown file, and creates a _reveal.js_ powered slide deck
 
-##How?
+## How?
 
-##Markdown!
+## Markdown!
 
 ***
 
@@ -29,7 +29,7 @@ Deckdown slides are created anytime a new header `<h1>-<h6>` or horizontal rule 
 
 When creating a slid deck for _Deckdown_, just write markdown, and deckdown figures out the rest.
 
-###A Basic Deck
+### A Basic Deck
 
 Here is a basic deck, written in markdown. It creates two slides: 
 
@@ -41,9 +41,9 @@ Welcome to this presentation
 Stay in touch! alan@13protons.com
 ```
 
-##So, why make a deck using *Deckdown*?
+## So, why make a deck using *Deckdown*?
 
-#CODE!
+# CODE!
 
 Markdown makes it easy to write code, and even specify what language should be used to highlight the syntax 
 
@@ -63,7 +63,7 @@ Then specify it's language by adding it after the fence:
       var sum = var1 + var2;
     ```
 ``````
-####Here's some Java:
+#### Here's some Java:
 
 ```java
 public class Factorial
@@ -83,7 +83,7 @@ public class Factorial
 }
 ```
 
-####And Some C:
+#### And Some C:
 
 ```c
   #include<stdio.h>
@@ -103,7 +103,7 @@ public class Factorial
      return 0;
   }
 ```
-####Maybe some Phython?
+#### Maybe some Phython?
 
 ```python
   prices = {'apple': 0.40, 'banana': 0.50}
@@ -114,9 +114,9 @@ public class Factorial
   print 'I owe the grocer $%.2f' % grocery_bill
 ```
 
-###You get the point
+### You get the point
 
 ***
 View this document's [source code](https://gist.github.com/alanguir/db718cea7e23338bb3bc) to see more, and don't forget to read up on the [markdown spec](http://daringfireball.net/projects/markdown/syntax) for more info about how to write markdown. 
 
-#Happy Decking :)
+# Happy Decking :)
