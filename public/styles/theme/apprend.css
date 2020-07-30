@@ -3,13 +3,13 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Code+Pro);
 @import url(http://fonts.googleapis.com/css?family=Lobster);
 /**
- * 
+ *
  * Default theme for Apprend.org
  * Copyright (C) 2015 Alan Languirand, 13protons.com
- * 
+ *
  * Based on the default theme for reveal.js,
  * by Hakim El Hattab, http://hakim.se
- *   
+ *
  */
 /*********************************************
  * GLOBAL STYLES
@@ -82,8 +82,6 @@ body {
  *********************************************/
 .reveal section img {
   margin: 15px 0px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 4px solid #eeeeee;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   -webkit-transition: all .2s linear;
   -moz-transition: all .2s linear;
@@ -102,6 +100,17 @@ body {
   background: rgba(255, 255, 255, 0.2);
   border-color: #13daec;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
+}
+.reveal .logo {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  z-index: 30;
+  left: 35px;
+  bottom: 35px;
+  background-image: url('images/apprend-white.png');
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 /*********************************************
  * NAVIGATION CONTROLS
